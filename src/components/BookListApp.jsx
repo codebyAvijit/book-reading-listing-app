@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AddBookForm from "./AddBookForm";
+import BookList from "./BookList";
 
 const BookListApp = () => {
   //creating array
@@ -8,28 +9,20 @@ const BookListApp = () => {
     return storedBooks ? JSON.parse(storedBooks) : [];
   });
 
-  //creating errors object for form validation
-  const [validationErrors, setValidationErrors] = useState({});
-
-  //creating editing state for books editing
-
-  const [editingId, setEditingId] = useState();
-
-  //creating the book object
-
-  const addBookHandler = (e) => {
-    e.preventDefault();
-    // console.log("New Book Details Added");
-    const newBook = {
-      id: crypto.randomUUID(),
-      ...newBookDetailsObject,
-    };
+  // parent handler
+  const addBookHandler = (book) => {
+    setBooksArray((prev) => {
+      const updated = [...prev, book];
+      localStorage.setItem("booksArray", JSON.stringify(updated)); // save in localStorage
+      return updated;
+    });
   };
 
   return (
     <div>
       <h1 className="text-center">BookList App</h1>
       <AddBookForm addBookHandler={addBookHandler} />
+      <BookList booksArray={booksArray} />
     </div>
   );
 };

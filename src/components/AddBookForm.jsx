@@ -8,15 +8,36 @@ const AddBookForm = ({ addBookHandler }) => {
     status: "",
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newBook = {
+      id: crypto.randomUUID(),
+      ...newBookDetailsObject,
+    };
+
+    addBookHandler(newBook); // pass to parent
+
+    console.log(newBook);
+
+    // reset form
+    setNewBookDetailsObject({
+      title: "",
+      author: "",
+      category: "",
+      status: "",
+    });
+  };
+
   return (
     <div>
-      <form className="max-w-sm mx-auto" onSubmit={addBookHandler}>
+      <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
         <div>
           <label
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             htmlFor="title"
           >
-            Book Title:{" "}
+            Book Title:
           </label>
           <input
             type="text"
@@ -32,12 +53,13 @@ const AddBookForm = ({ addBookHandler }) => {
             }
           />
         </div>
+
         <div>
           <label
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             htmlFor="author"
           >
-            Author:{" "}
+            Author:
           </label>
           <input
             type="text"
@@ -53,6 +75,7 @@ const AddBookForm = ({ addBookHandler }) => {
             }
           />
         </div>
+
         <div>
           <label
             htmlFor="category"
@@ -61,8 +84,8 @@ const AddBookForm = ({ addBookHandler }) => {
             Select an option
           </label>
           <select
-            id="catergory"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            id="category"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             value={newBookDetailsObject.category}
             onChange={(e) =>
               setNewBookDetailsObject({
@@ -78,6 +101,7 @@ const AddBookForm = ({ addBookHandler }) => {
             <option value="others">Others</option>
           </select>
         </div>
+
         <div>
           <label
             htmlFor="status"
@@ -86,8 +110,8 @@ const AddBookForm = ({ addBookHandler }) => {
             Status
           </label>
           <select
-            id="Status"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            id="status"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             value={newBookDetailsObject.status}
             onChange={(e) =>
               setNewBookDetailsObject({
@@ -101,6 +125,15 @@ const AddBookForm = ({ addBookHandler }) => {
             <option value="reading">Reading</option>
             <option value="completed">Completed</option>
           </select>
+        </div>
+
+        <div className="text-center">
+          <button
+            type="submit"
+            className="text-white mt-5 mb-5 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          >
+            Add Book
+          </button>
         </div>
       </form>
     </div>
