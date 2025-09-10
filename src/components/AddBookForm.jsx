@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const AddBookForm = ({ addBookHandler }) => {
+const AddBookForm = ({
+  addBookHandler,
+  validationErrors,
+  setValidationErrors,
+}) => {
   const [newBookDetailsObject, setNewBookDetailsObject] = useState({
     title: "",
     author: "",
@@ -18,7 +22,7 @@ const AddBookForm = ({ addBookHandler }) => {
 
     addBookHandler(newBook); // pass to parent
 
-    console.log(newBook);
+    // console.log(newBook);
 
     // reset form
     setNewBookDetailsObject({
@@ -53,7 +57,9 @@ const AddBookForm = ({ addBookHandler }) => {
             }
           />
         </div>
-
+        {validationErrors.title && (
+          <p className="text-red-500">{validationErrors.title}</p>
+        )}
         <div>
           <label
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -75,7 +81,9 @@ const AddBookForm = ({ addBookHandler }) => {
             }
           />
         </div>
-
+        {validationErrors.author && (
+          <p className="text-red-500">{validationErrors.author}</p>
+        )}
         <div>
           <label
             htmlFor="category"
@@ -101,7 +109,9 @@ const AddBookForm = ({ addBookHandler }) => {
             <option value="others">Others</option>
           </select>
         </div>
-
+        {validationErrors.category && (
+          <p className="text-red-500">{validationErrors.category}</p>
+        )}
         <div>
           <label
             htmlFor="status"
@@ -126,7 +136,9 @@ const AddBookForm = ({ addBookHandler }) => {
             <option value="completed">Completed</option>
           </select>
         </div>
-
+        {validationErrors.status && (
+          <p className="text-red-500">{validationErrors.status}</p>
+        )}
         <div className="text-center">
           <button
             type="submit"
