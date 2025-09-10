@@ -22,7 +22,7 @@ const BookListApp = () => {
     <div>
       <h1 className="text-center">BookList App</h1>
       <AddBookForm addBookHandler={addBookHandler} />
-      <BookList booksArray={booksArray} />
+      <BookList booksArray={booksArray} setBooksArray={setBooksArray} />
     </div>
   );
 };

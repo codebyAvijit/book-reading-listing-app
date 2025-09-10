@@ -1,6 +1,6 @@
 import React from "react";
 
-const BookList = ({ booksArray }) => {
+const BookList = ({ booksArray, setBooksArray }) => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-10">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -38,7 +38,16 @@ const BookList = ({ booksArray }) => {
                   <button className="px-2 py-1 text-xs text-white bg-blue-500 rounded hover:bg-blue-600">
                     Edit
                   </button>
-                  <button className="px-2 py-1 text-xs text-white bg-red-500 rounded hover:bg-red-600">
+                  <button
+                    onClick={() =>
+                      setBooksArray(
+                        booksArray.filter((book) => {
+                          return book.id !== singleBookDetail.id;
+                        })
+                      )
+                    }
+                    className="px-2 py-1 text-xs text-white bg-red-500 rounded hover:bg-red-600"
+                  >
                     Delete
                   </button>
                 </div>
